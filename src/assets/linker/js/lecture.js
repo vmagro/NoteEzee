@@ -1,8 +1,11 @@
 function scrollToNote(noteId){
+  console.log('scrolling to ' + noteId);
   $('html, body').animate({
-        scrollTop: $("#"+noteId).offset().top - 12
+        scrollTop: $("#"+noteId).offset().top - 200
   }, 1000);
 }
+
+var lastScrolledTo = '';
 
 $(function(){
   $('.lecture').on('click', function(){
@@ -34,6 +37,31 @@ $(function(){
   });
 
   $('audio')[0].addEventListener('timeupdate', function(){
-    $('.total-progress').attr('value', $('audio')[0].currentTime);
+    var time = $('audio')[0].currentTime;
+    $('.total-progress').attr('value', time);
+
+    var notes = $('.note');
+    notes.sort(function(a, b){
+      return $(a).attr('timestamp') < $(b).attr('timestamp') ? 1 : -1;
+    });
+    for(var i=1; i<notes.length; i++){
+      if($(notes[i]).attr('timestamp') < time){
+        var id = $(notes[i]).attr('id');
+        if(id !== lastScrolledTo){
+          scrollToNote(id);
+
+          $(notes[i]).addClass('active');
+          $('#'+lastScrolledTo).removeClass('active');
+          lastScrolledTo = id;
+        }
+        return;
+      }
+    }
+  });
+
+  $('.note-play').on('click', function(){
+    var timestamp = $(this).attr('timestamp');
+    $('audio')[0].currentTime = timestamp;
+    $('audio')[0].play();
   });
 });
