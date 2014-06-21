@@ -155,3 +155,11 @@ body {
   border: 1px solid #dddddd;
   border-radius: 28px;
 }
+
+input.lecture-name {
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
