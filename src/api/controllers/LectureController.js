@@ -22,6 +22,8 @@ var crypto = require('crypto');
 
 var fs = require('fs');
 
+var async = require('async');
+
 module.exports = {
 
 
@@ -147,17 +149,52 @@ module.exports = {
   },
 
   get: function(req, res){
+    console.log('lecture#get');
     Lecture.findOne({id: req.param('id')}).done(function(err, lecture){
-      if(err)
+      if(err){
         return res.json({
           status: 'err',
           err: err
         });
+      }
 
+      var notesIds = lecture.notes;
+      lecture.notes = [];
+      async.mapSeries(notesIds, function(id, callback){
+        Note.findOne({id: id}).done(function(err, note){
+          callback(err, note);
+          console.log(note);
+        });
+      }, function(err, notes){
+        lecture.notes = notes;
         return res.json(lecture);
+      });
     });
   },
 
+  view: function(req, res){
+    console.log('lecture#get');
+    Lecture.findOne({id: req.param('id')}).done(function(err, lecture){
+      if(err){
+        return res.json({
+          status: 'err',
+          err: err
+        });
+      }
+
+      var notesIds = lecture.notes;
+      lecture.notes = [];
+      async.mapSeries(notesIds, function(id, callback){
+        Note.findOne({id: id}).done(function(err, note){
+          callback(err, note);
+          console.log(note);
+        });
+      }, function(err, notes){
+        lecture.notes = notes;
+        return res.view({lecture: lecture});
+      });
+    });
+  },
 
   /**
    * Overrides for the settings in `config/controllers.js`
