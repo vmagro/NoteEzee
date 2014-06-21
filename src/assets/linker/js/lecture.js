@@ -69,6 +69,10 @@ $(function(){
 
   $('.lecture-name').on('click', lectureClick);
 
+  $('.back').on('click', function(){
+    window.location.href = '/lecture/index';
+  });
+
 });
 
 function lectureClick(){
