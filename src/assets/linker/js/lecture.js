@@ -1,7 +1,7 @@
 function scrollToNote(noteId){
   console.log('scrolling to ' + noteId);
   $('html, body').animate({
-    scrollTop: $("#"+noteId).offset().top - 200
+    scrollTop: $("#"+noteId).offset().top - 320
   }, 1000);
 }
 
