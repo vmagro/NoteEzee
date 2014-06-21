@@ -24,10 +24,11 @@ body {
 .single-lecture-header {
   font-family: 'Roboto', sans-serif;
   font-size: 40px;
+  position: fixed;
 }
 
 .notes {
-  margin-top: 120px;
+  margin-top: 160px;
 }
 
 .note {
@@ -40,6 +41,12 @@ body {
 
   border-radius: 3px;
   box-shadow: 0 0 2em lightgray;
+
+  float: left;
+}
+
+.active {
+  box-shadow: 0 0 2em gold;
 }
 
 .note-img {
@@ -132,4 +139,19 @@ body {
 
 .total-progress::-webkit-progress-value {
   background-color: black;
+}
+
+.note-play {
+  width: 40px;
+  height: 40px;
+  background: url(/linker/images/PlayGreyBT.png) no-repeat center;
+  float: left;
+  margin-left: 20%;
+  margin-right: 10px;
+  margin-top: 200px;
+
+  padding: 8px;
+
+  border: 1px solid #dddddd;
+  border-radius: 28px;
 }
