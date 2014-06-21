@@ -14,3 +14,5 @@ Viewing endpoints
 /lecture
   view all lectures in the database
   click on any of them to see in depth
+
+Current Galvanize IP: 10.63.149.163
