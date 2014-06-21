@@ -205,7 +205,17 @@ module.exports = {
         });
       }
 
-      return res.view({title: 'Lectures', lectures: lectures});
+      async.map(lectures, function(lecture, callback){
+        var date = new Date(lecture.createdAt);
+        lecture.day = date.getDate();
+        lecture.month = getMonth(date.getMonth());
+        lecture.time = (date.getHours() + 1) % 12;
+        lecture.time += ':'+date.getMinutes();
+        lecture.time += ' ' + date.getHours() >= 12 ? 'PM' : 'AM';
+        callback(null, lecture);
+      }, function(err, lectures){
+        return res.view({title: 'NoteEzee', lectures: lectures});
+      });
     });
   },
 
@@ -234,4 +244,22 @@ function uploadFile(file, mime, callback){
     else
       callback(null, url);
   });
+}
+
+function getMonth(month){
+  switch(month){
+    case 0: return 'JAN';
+    case 1: return 'FEB';
+    case 2: return 'MAR';
+    case 3: return 'APR';
+    case 4: return 'MAY';
+    case 5: return 'JUN';
+    case 6: return 'JUL';
+    case 7: return 'AUG';
+    case 8: return 'SEP';
+    case 9: return 'OCT';
+    case 10: return 'NOV';
+    case 11: return 'DEC';
+    default: return '';
+  }
 }
