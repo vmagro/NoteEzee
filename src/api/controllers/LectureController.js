@@ -32,7 +32,7 @@ module.exports = {
    *    `/lecture/create`
    */
   create: function (req, res) {
-    uploadFile(req.files.audio, 'audio/mp3', function(err, url){
+    uploadFile(req.files.audio, 'audio/3gpp', function(err, url){
       if(err){
         console.log(err);
         return res.json({
@@ -184,15 +184,19 @@ module.exports = {
 
       var notesIds = lecture.notes;
       lecture.notes = [];
-      async.mapSeries(notesIds, function(id, callback){
-        Note.findOne({id: id}).done(function(err, note){
-          callback(err, note);
-          console.log(note);
+      if(notesIds){
+        async.mapSeries(notesIds, function(id, callback){
+          Note.findOne({id: id}).done(function(err, note){
+            callback(err, note);
+            console.log(note);
+          });
+        }, function(err, notes){
+          lecture.notes = notes;
+          return res.view({title: lecture.name, lecture: lecture});
         });
-      }, function(err, notes){
-        lecture.notes = notes;
+      } else {
         return res.view({title: lecture.name, lecture: lecture});
-      });
+      }
     });
   },
 
