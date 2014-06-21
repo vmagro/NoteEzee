@@ -30,15 +30,7 @@ module.exports = {
    *    `/lecture/create`
    */
   create: function (req, res) {
-    var key = crypto.randomBytes(24).toString('base64').replace(/\//g, '_').replace(/\+/g, '-') + '.mp3';
-    var url = 'https://s3-us-west-2.amazonaws.com/glass-education/'+key;
-    s3.putObject({
-      ACL : 'public-read',
-      Bucket : 'glass-education',
-      Key : key,
-      ContentType : 'audio/mpeg',
-      Body : fs.createReadStream(req.files.audio.path)
-    }, function(err, data){
+    uploadFile(req.files.audio, 'audio/mp3', function(err, url){
       if(err){
         console.log(err);
         return res.json({
@@ -109,7 +101,15 @@ module.exports = {
    *    `/lecture/add_photo`
    */
   add_photo: function (req, res) {
+    Lecture.findOne({id: req.param('id')}).done(function(err, lecture){
+      if(err)
+        return res.json({
+          status: 'err',
+          err: err
+        });
 
+
+    });
     // Send a JSON response
     return res.json({
       hello: 'world'
@@ -137,3 +137,21 @@ module.exports = {
 
 
 };
+
+function uploadFile(file, mime, callback){
+  var path = file.path;
+  var key = crypto.randomBytes(24).toString('base64').replace(/\//g, '_').replace(/\+/g, '-') + path.substring(path.lastIndexOf('.'));
+  var url = 'https://s3-us-west-2.amazonaws.com/glass-education/'+key;
+  s3.putObject({
+    ACL : 'public-read',
+    Bucket : 'glass-education',
+    Key : key,
+    ContentType : mime,
+    Body : fs.createReadStream(path)
+  }, function(err, data){
+    if(err)
+      callback(err);
+    else
+      callback(null, url);
+    });
+}
