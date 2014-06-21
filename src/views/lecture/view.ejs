@@ -1,6 +1,7 @@
-<div>
-<div class="lecture-header">
-  <p><%= lecture.name %></p>
+<div class="header single-lecture-header">
+  <div><%= lecture.name %></div>
+  <div class="play-pause-button"></div>
+  <progress class="total-progress"></progress>
 </div>
 
 <div class="notes">
@@ -15,4 +16,4 @@
 
 </div>
 
-</div>
+<audio src="<%= lecture.audioUrl %>"></audio>
