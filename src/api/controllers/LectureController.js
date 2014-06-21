@@ -123,7 +123,7 @@ module.exports = {
 
         Note.create({
           imageUrl: url,
-          audioTime: req.body.timeStamp
+          audioTime: req.body.timeStamp / 1000
         }).done(function(err, note){
           if(!lecture.notes)
             lecture.notes = [];
