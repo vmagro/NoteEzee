@@ -46,7 +46,7 @@ $(function(){
     notes.sort(function(a, b){
       return $(a).attr('timestamp') < $(b).attr('timestamp') ? 1 : -1;
     });
-    for(var i=1; i<notes.length; i++){
+    for(var i=0; i<notes.length; i++){
       if($(notes[i]).attr('timestamp') < time){
         var id = $(notes[i]).attr('id');
         if(id !== lastScrolledTo){
