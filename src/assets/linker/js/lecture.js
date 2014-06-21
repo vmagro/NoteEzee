@@ -8,8 +8,8 @@ function scrollToNote(noteId){
 var lastScrolledTo = '';
 
 $(function(){
-  $('.lecture').on('click', function(){
-    var id = $(this).attr('id');
+  $('.lecture-title').on('click', function(){
+    var id = $(this).attr('data-lecture');
     var url = '/lecture/view/'+id;
     window.location.href = url;
     console.log('click');
