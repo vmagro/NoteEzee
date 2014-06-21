@@ -23,6 +23,18 @@ body {
   font-family: 'Pacifico', cursive;
 }
 
+.back {
+  position: absolute;
+  float: left;
+  left: 25px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.back:hover {
+  color: black;
+}
+
 .logo {
   margin-right: 15px;
   height: 60px;
