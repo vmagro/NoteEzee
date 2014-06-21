@@ -68,23 +68,38 @@ module.exports = {
    *    `/lecture/update`
    */
   update: function (req, res) {
-
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
+    Lecture.findOne({
+      id: req.param('id')
+    }).done(function(err, lecture){
+      if(req.body.name)
+        lecture.name = req.body.name;
+      lecture.save(function(err){
+        if(err)
+          return res.json({
+            status: 'err',
+            err: err
+          });
+        return res.json(lecture);
+      });
     });
   },
-
 
   /**
    * Action blueprints:
    *    `/lecture/destroy`
    */
   destroy: function (req, res) {
-
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
+    Lecture.destroy({
+      id: req.param('id')
+    }).done(function(err){
+      if(err)
+        return res.json({
+          status: 'err',
+          err: err
+        });
+      else return res.json({
+        status: 'success'
+      });
     });
   },
 
