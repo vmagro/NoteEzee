@@ -1,5 +1,6 @@
 html {
   font-family: 'Roboto', sans-serif;
+  cursor: default;
 }
 
 body {
@@ -14,11 +15,17 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
+  height: 125px;
   color: white;
   font-size: 60px;
   text-align: center;
 
   font-family: 'Pacifico', cursive;
+}
+
+.logo {
+  margin-right: 15px;
+  height: 60px;
 }
 
 .single-lecture-header {
@@ -60,10 +67,11 @@ body {
 }
 
 .lecture {
-  height: 190px
+  height: 130px;
   margin: auto;
   padding: 8px;
   padding-left: 30px;
+  padding-top: 50px;
 }
 
 .lecture:not(:last-child) {
@@ -71,31 +79,46 @@ body {
 }
 
 .date {
-  width: 86px;
-  height: 78px;
-  padding-top: 8px;
+  width: 85px;
+  height: 85px;
   background-color: #333333;
   color: white;
-  font-size: 30px;
+  font-size: 36px;
   text-align: center;
 
   float: left;
+}
+
+.day {
+  margin: auto;
+  margin-top: 8px;
+}
+
+.month {
+  font-size: 20px;
+  margin-top: -4px;
 }
 
 .time {
   float: left;
   margin-top: 30px;
   margin-left: 30px;
-  font-size: 25px;
+  font-size: 40px;
   color: #cccccc;
+  width: 156px;
 }
 
 .lecture-title {
   float: left;
-  font-size: 30px;
-  margin-top: 25px;
-  margin-left: 20px;
+  font-size: 40px;
+  margin-left: 45px;
   color: #545454;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.lecture-title:hover {
+  color: #ff895f;
 }
 
 .lecture-size {
@@ -104,13 +127,13 @@ body {
   font-size: 30px;
   color: #dddddd;
 
-  margin-top: 25px;
+  margin-top: 30px;
   margin-right: 10px;
 }
 
 .camera {
   float: right;
-  margin-top: 30px;
+  margin-top: 35px;
   margin-right: 15px;
 }
 

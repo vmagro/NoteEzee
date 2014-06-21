@@ -1,6 +1,6 @@
 <div>
 <div class="header">
-  <span>NoteEzee</span>
+  <img class="logo" src="/linker/images/Logo.png"></img><span>NoteEzee</span>
 </div>
 
 <div class="lectures">
@@ -13,7 +13,7 @@
       <div class="month"><%=lecture.month%></div>
     </div>
     <div class="time"><%=lecture.time%></div>
-    <div class="lecture-title"><% if(lecture.name){ %><%= lecture.name %><% } else{ %> Unnamed lecture <% } %></div>
+    <div class="lecture-title" data-lecture="<%=lecture.id%>"><% if(lecture.name){ %><%= lecture.name %><% } else{ %> Unnamed lecture <% } %></div>
     <img class="camera" src="/linker/images/camera.png"></img>
     <div class="lecture-size"><%if(lecture.notes){%><%=lecture.notes.length%><%}else{%>0<%}%></div>
     <div style="clear: both;"></div>
