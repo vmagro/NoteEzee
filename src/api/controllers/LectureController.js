@@ -192,6 +192,9 @@ module.exports = {
           });
         }, function(err, notes){
           lecture.notes = notes;
+          lecture.notes.sort(function(a, b){
+            return a.audioTime < b.audioTime ? -1 : 1;
+          });
           return res.view({title: lecture.name, lecture: lecture});
         });
       } else {
