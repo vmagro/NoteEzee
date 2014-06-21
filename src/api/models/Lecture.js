@@ -11,10 +11,7 @@ module.exports = {
   attributes: {
     name: 'string',
     audioUrl: 'string',
-    notes: [
-      {
-        model: 'note'
-      }]
+    notes: 'array'
   }
 
 };

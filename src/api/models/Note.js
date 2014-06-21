@@ -11,7 +11,8 @@ module.exports = {
   attributes: {
     title: 'string',
     imageUrl: 'string',
-    audioTime: 'integer'
+    audioTime: 'integer',
+    lectureId: 'string'
   }
 
 };

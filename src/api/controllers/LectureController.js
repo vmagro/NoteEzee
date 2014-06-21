@@ -71,7 +71,7 @@ module.exports = {
             status: 'err',
             err: err
           });
-        return res.json(lecture);
+          return res.json(lecture);
       });
     });
   },
@@ -89,9 +89,9 @@ module.exports = {
           status: 'err',
           err: err
         });
-      else return res.json({
-        status: 'success'
-      });
+        else return res.json({
+          status: 'success'
+        });
     });
   },
 
@@ -102,17 +102,47 @@ module.exports = {
    */
   add_photo: function (req, res) {
     Lecture.findOne({id: req.param('id')}).done(function(err, lecture){
-      if(err)
+      if(err){
         return res.json({
           status: 'err',
           err: err
         });
+      }
 
+      console.log('adding note to lecture '+lecture.id);
 
-    });
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
+      uploadFile(req.files.photo, 'image/jpeg', function(err, url){
+        if(err){
+          return res.json({
+            status: 'err',
+            err: err
+          });
+        }
+
+        Note.create({
+          imageUrl: url,
+          audioTime: req.body.timeStamp
+        }).done(function(err, note){
+          if(!lecture.notes)
+            lecture.notes = [];
+
+          lecture.notes.push(note.id);
+          console.log(lecture);
+
+          lecture.save(function(err){
+            console.log('save callback');
+            if(err){
+              return res.json({
+                status: 'err',
+                err: err
+              });
+            }
+
+            return res.json(note);
+          });
+        });
+      });
+
     });
   },
 
@@ -141,7 +171,7 @@ module.exports = {
 function uploadFile(file, mime, callback){
   var path = file.path;
   var key = crypto.randomBytes(24).toString('base64').replace(/\//g, '_').replace(/\+/g, '-') + path.substring(path.lastIndexOf('.'));
-  var url = 'https://s3-us-west-2.amazonaws.com/glass-education/'+key;
+    var url = 'https://s3-us-west-2.amazonaws.com/glass-education/'+key;
   s3.putObject({
     ACL : 'public-read',
     Bucket : 'glass-education',
@@ -153,5 +183,5 @@ function uploadFile(file, mime, callback){
       callback(err);
     else
       callback(null, url);
-    });
+  });
 }
