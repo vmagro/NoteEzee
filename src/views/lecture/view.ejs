@@ -1,0 +1,18 @@
+<div>
+<h1><%= lecture.name %></h1>
+
+<div class="notes">
+
+<% _.each(lecture.notes, function(note){
+%>
+  <div class="note" id="<%= note.id %>">
+    <p class="note-title"><% if(note.title) { %>
+                                <%= note.title %>
+                          <% } %></p>
+    <img class="note-img" src="<%= note.imageUrl %>"></img>
+  </div>
+<% }); %>
+
+</div>
+
+</div>
