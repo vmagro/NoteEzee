@@ -1,6 +1,6 @@
 <div>
-<div class="lecture-header">
-  <p>Lectures</p>
+<div class="header">
+  <span>NoteEzee</span>
 </div>
 
 <div class="lectures">
@@ -8,8 +8,15 @@
 <% _.each(lectures, function(lecture){
 %>
   <div class="lecture" id="<%= lecture.id %>">
-    <p class="lecture-title"><% if(lecture.name){ %><%= lecture.name %><% } else{ %> Unnamed lecture <% } %></p>
-    <p class="lecture-size"><%=lecture.notes.length%> notes</p>
+    <div class="date">
+      <div class="day"><%=lecture.day%></div>
+      <div class="month"><%=lecture.month%></div>
+    </div>
+    <div class="time"><%=lecture.time%></div>
+    <div class="lecture-title"><% if(lecture.name){ %><%= lecture.name %><% } else{ %> Unnamed lecture <% } %></div>
+    <img class="camera" src="/linker/images/camera.png"></img>
+    <div class="lecture-size"><%if(lecture.notes){%><%=lecture.notes.length%><%}else{%>0<%}%></div>
+    <div style="clear: both;"></div>
   </div>
 <% }); %>
 
