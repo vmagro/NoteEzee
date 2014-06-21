@@ -191,7 +191,7 @@ module.exports = {
         });
       }, function(err, notes){
         lecture.notes = notes;
-        return res.view({lecture: lecture});
+        return res.view({title: lecture.name, lecture: lecture});
       });
     });
   },
@@ -205,7 +205,7 @@ module.exports = {
         });
       }
 
-      return res.view({lectures: lectures});
+      return res.view({title: 'Lectures', lectures: lectures});
     });
   },
 
