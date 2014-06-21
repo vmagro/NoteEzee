@@ -1,0 +1,18 @@
+<div>
+<div class="lecture-header">
+  <p>Lectures</p>
+</div>
+
+<div class="lectures">
+
+<% _.each(lectures, function(lecture){
+%>
+  <div class="lecture" id="<%= lecture.id %>">
+    <p class="lecture-title"><% if(lecture.name){ %><%= lecture.name %><% } else{ %> Unnamed lecture <% } %></p>
+    <p class="lecture-size"><%=lecture.notes.length%> notes</p>
+  </div>
+<% }); %>
+
+</div>
+
+</div>

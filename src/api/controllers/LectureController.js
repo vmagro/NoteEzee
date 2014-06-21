@@ -196,6 +196,19 @@ module.exports = {
     });
   },
 
+  index: function(req, res){
+    Lecture.find().done(function(err, lectures){
+      if(err){
+        return res.json({
+          statuus: 'err',
+          err: err
+        });
+      }
+
+      return res.view({lectures: lectures});
+    });
+  },
+
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to LectureController)
