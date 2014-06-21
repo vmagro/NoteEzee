@@ -1,0 +1,42 @@
+html {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+    Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+body {
+  background: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+.lecture-title {
+  background-color: #33b5e5;
+  margin-top: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+
+  border-bottom: 5px solid #0099cc;
+}
+
+.notes {
+  margin-top: 120px;
+}
+
+.note {
+  width: 60%;
+  margin: auto;
+  margin-bottom: 15px;
+  padding: 8px;
+
+  border-radius: 3px;
+  box-shadow: 0 0 2em lightgray;
+}
+
+.note-img {
+  width: 100%;
+  border-radius: 2px;
+}
