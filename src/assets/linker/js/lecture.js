@@ -1,7 +1,7 @@
 function scrollToNote(noteId){
   console.log('scrolling to ' + noteId);
   $('html, body').animate({
-        scrollTop: $("#"+noteId).offset().top - 200
+    scrollTop: $("#"+noteId).offset().top - 200
   }, 1000);
 }
 
@@ -66,4 +66,25 @@ $(function(){
     $('audio')[0].currentTime = timestamp;
     $('audio')[0].play();
   });
+
+  $('.lecture-name').on('click', lectureClick);
+
 });
+
+function lectureClick(){
+  var old = $('.lecture-name').html();
+  $('.lecture-name').contents().unwrap().wrap('<input class="lecture-name">').attr('type', 'text').addClass('lecture-name');
+  $('.lecture-name').val(old);
+  $('.lecture-name').on('keypress', lectureKeypress);
+}
+
+function lectureKeypress(e){
+  if(e.which == 13) {
+    $('.lecture-name').html($('.lecture-name').val());
+    $('.lecture-name').contents().unwrap().wrap('<div class="lecture-name">');
+    $('.lecture-name').on('click', lectureClick);
+    $.post('/lecture/update/'+window.location.href.substring(window.location.href.lastIndexOf('/')+1), {
+      name: $('.lecture-name').html()
+    });
+  }
+}
