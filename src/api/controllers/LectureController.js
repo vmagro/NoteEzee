@@ -187,6 +187,10 @@ module.exports = {
       if(notesIds){
         async.mapSeries(notesIds, function(id, callback){
           Note.findOne({id: id}).done(function(err, note){
+            if (err) {
+              callback();
+              return;
+            }
             callback(err, note);
             console.log(note);
           });
