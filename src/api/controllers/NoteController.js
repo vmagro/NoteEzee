@@ -54,6 +54,9 @@ module.exports = {
       if(req.body.title)
         note.title = req.body.title;
 
+      if(req.body.timeStamp)
+        note.audioTime = req.body.timeStamp;
+
       note.save(function(err, note){
         if(err){
           return res.json({
