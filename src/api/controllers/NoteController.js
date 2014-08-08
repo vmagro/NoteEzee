@@ -55,7 +55,7 @@ module.exports = {
         note.title = req.body.title;
 
       if(req.body.timeStamp)
-        note.audioTime = req.body.timeStamp;
+        note.audioTime = req.body.timeStamp / 1000;
 
       note.save(function(err, note){
         if(err){
